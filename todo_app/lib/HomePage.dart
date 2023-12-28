@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/ListOfTask.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -12,13 +12,26 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.pink,
+        // hoverColor: Colors.pink,
+        // hoverElevation: 100,
+        splashColor: Colors.amber,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        child: Icon(
+          Icons.add,
+          size: 35,
+          color: Colors.white,
+        ),
+      ),
       body: Column(
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 2.2,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
@@ -27,7 +40,9 @@ class _homePageState extends State<homePage> {
                   Colors.pink,
                 ],
               ),
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25)),
             ),
           ),
           SizedBox(
@@ -40,6 +55,12 @@ class _homePageState extends State<homePage> {
                 fontSize: MediaQuery.of(context).size.height / 30,
               ),
             ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 2.5,
+            // color: Colors.amber,
+            child: listOfTasks(),
           ),
         ],
       ),

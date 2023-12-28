@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/HomePage.dart';
 
+import 'AddTask.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      body: homePage(),
+      body: addTaskInList(),
     ));
   }
 }
