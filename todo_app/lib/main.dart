@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/HomePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,14 +17,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 2.2,
-        decoration: BoxDecoration(
-          color: Colors.amber,
-          borderRadius: BorderRadius.circular(25),
-        ),
-      ),
+      body: homePage(),
     ));
   }
 }
