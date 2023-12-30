@@ -45,7 +45,6 @@ List<TodoItem> todos = [
   TodoItem(title: 'Read a book', isDone: false),
   TodoItem(title: 'Take power-nap', isDone: false),
   TodoItem(title: 'complete workout', isDone: false),
-  // TodoItem(title: 'Read a book', isDone: false),
 ];
 
 // ignore: camel_case_types

@@ -141,8 +141,8 @@ class existCode extends StatelessWidget {
                                   // color: Colors.teal,
                                   child: Center(
                                     child: Text(
-                                      "${taskCompeletedCount} tasks compeleted",
-                                      style: TextStyle(fontSize: 15),
+                                      "$taskCompeletedCount tasks compeleted",
+                                      style: const TextStyle(fontSize: 15),
                                     ),
                                   ),
                                 ),

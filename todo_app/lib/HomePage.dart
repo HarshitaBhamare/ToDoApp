@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/AddTask.dart';
 import 'package:todo_app/ListOfTask.dart';
 import 'package:todo_app/addTaskProvider.dart';
-import 'package:todo_app/clickedProvider.dart';
 import 'addName.dart';
 import 'existcode.dart';
 
@@ -37,7 +36,6 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     final isOpen = context.watch<addTaskProvider>().isOpen;
-    final isClicked = context.watch<clickedProvider>().isClick;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
