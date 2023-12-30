@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/ListOfTask.dart';
-import 'package:todo_app/clickedProvider.dart';
 
 import 'addTaskProvider.dart';
 
@@ -27,14 +26,12 @@ class _addTaskInListState extends State<addTaskInList> {
 
   @override
   Widget build(BuildContext context) {
-    final isClose = context.watch<addTaskProvider>().isOpen;
-    final isClicked = context.watch<clickedProvider>().isClick;
     return Container(
       color: Colors.black54,
       alignment: Alignment.center,
       child: Container(
         width: MediaQuery.of(context).size.width / 1.2,
-        height: MediaQuery.of(context).size.height / 2.2,
+        height: MediaQuery.of(context).size.height / 3,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -42,7 +39,7 @@ class _addTaskInListState extends State<addTaskInList> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height / 50,
+              height: MediaQuery.of(context).size.height / 80,
             ),
             Container(
               width: MediaQuery.of(context).size.width / 6,
@@ -67,9 +64,9 @@ class _addTaskInListState extends State<addTaskInList> {
               height: MediaQuery.of(context).size.height * .009,
             ),
             Text(
-              "New Task",
+              "Add your New Task",
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height / 22,
+                fontSize: MediaQuery.of(context).size.height / 30,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -77,25 +74,26 @@ class _addTaskInListState extends State<addTaskInList> {
               height: MediaQuery.of(context).size.height * .01,
             ),
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.only(left: 10),
               width: MediaQuery.of(context).size.width / 1.41,
-              height: MediaQuery.of(context).size.height / 5,
+              height: MediaQuery.of(context).size.height / 15,
               decoration: BoxDecoration(
                   color: Colors.black12,
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(10)),
               child: TextField(
+                cursorHeight: MediaQuery.of(context).size.height / 25,
                 decoration: const InputDecoration(
-                    hintStyle: TextStyle(fontSize: 25),
+                    hintStyle: TextStyle(fontSize: 20),
                     border: InputBorder.none,
                     hintText: "Enter new Task "),
                 controller: taskController,
                 style: const TextStyle(
-                  fontSize: 30,
+                  fontSize: 20,
                 ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 70,
+              height: MediaQuery.of(context).size.height / 25,
             ),
             Row(
               children: [
@@ -110,7 +108,7 @@ class _addTaskInListState extends State<addTaskInList> {
                   child: Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2.3,
-                    height: MediaQuery.of(context).size.height / 22,
+                    height: MediaQuery.of(context).size.height / 20,
                     decoration: const BoxDecoration(
                       // color: Colors.blue,
                       borderRadius:
@@ -118,13 +116,13 @@ class _addTaskInListState extends State<addTaskInList> {
                     ),
                     child: const Text(
                       "Cancel",
-                      style: TextStyle(color: Colors.red, fontSize: 20),
+                      style: TextStyle(color: Colors.red, fontSize: 23),
                     ),
                   ),
                 ),
                 const Text(
                   "|",
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 30, color: Colors.black26),
                 ),
                 InkWell(
                   onTap: () {
@@ -133,8 +131,6 @@ class _addTaskInListState extends State<addTaskInList> {
                         todos.add(TodoItem(title: taskController.text.trim()));
                         taskController.clear();
                       });
-                      // Provider.of<clickedProvider>(context, listen: false)
-                      //     .checkClick();
                       Provider.of<addTaskProvider>(context, listen: false)
                           .CloseMenu();
                       Provider.of<ListOfTask>(context, listen: false).itemadd();
@@ -142,15 +138,17 @@ class _addTaskInListState extends State<addTaskInList> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width / 2.69,
-                    height: MediaQuery.of(context).size.height / 22,
+                    width: MediaQuery.of(context).size.width / 2.7,
+                    height: MediaQuery.of(context).size.height / 20,
                     decoration: const BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(bottomRight: Radius.circular(20)),
+                      // color: Colors.red,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(20),
+                      ),
                     ),
                     child: const Text(
                       "Create",
-                      style: TextStyle(color: Colors.blue, fontSize: 20),
+                      style: TextStyle(color: Colors.blue, fontSize: 23),
                     ),
                   ),
                 ),

@@ -3,28 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ListOfTask with ChangeNotifier {
-  int number = todos.length;
-  int set = 0;
-  int count = 1;
-  // bool onclick = false;
+  int totalTaskCount = todos.length;
+  int compeletedTaskCount = 0;
   void itemadd() {
-    number++;
+    totalTaskCount++;
     notifyListeners();
   }
 
   void itemdel() {
-    number--;
+    totalTaskCount--;
     notifyListeners();
   }
 
-  void check(bool a) {
-    if (a == true) {
-      count++;
-      notifyListeners();
+  void setCompletedTask(bool isCompeleted) {
+    if (totalTaskCount == 0) {
+      compeletedTaskCount = 0;
     } else {
-      count--;
-      notifyListeners();
+      if (isCompeleted) {
+        compeletedTaskCount++;
+      } else {
+        compeletedTaskCount--;
+      }
     }
+
+    notifyListeners();
   }
 }
 
@@ -39,7 +41,7 @@ List<TodoItem> todos = [
   TodoItem(title: 'Buy groceries', isDone: false),
   TodoItem(title: 'Call the plumber', isDone: false),
   TodoItem(title: 'Finish Flutter project', isDone: false),
-  TodoItem(title: 'Workout for 30 minutes', isDone: true),
+  TodoItem(title: 'Workout for 30 minutes', isDone: false),
   TodoItem(title: 'Read a book', isDone: false),
   TodoItem(title: 'Take power-nap', isDone: false),
   TodoItem(title: 'complete workout', isDone: false),
@@ -58,13 +60,11 @@ class listItems extends StatefulWidget {
 class _listItemsState extends State<listItems> {
   @override
   Widget build(BuildContext context) {
-    int c = context.watch<ListOfTask>().count;
     return Consumer<ListOfTask>(builder: (context, listOfTask, child) {
       return SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             TodoItem item = todos[index];
-
             return Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Container(
@@ -87,8 +87,9 @@ class _listItemsState extends State<listItems> {
                           // Provider.of<ListOfTask>(context, listen: false)
                           //     .check(item.isDone);
                           item.isDone = !item.isDone;
+                          Provider.of<ListOfTask>(context, listen: false)
+                              .setCompletedTask(item.isDone);
                           // ignore: avoid_print
-                          print("count $c");
                         });
                       },
                       child: Container(

@@ -8,9 +8,10 @@ class existCode extends StatelessWidget {
   const existCode({super.key, required this.name});
   @override
   Widget build(BuildContext context) {
-    final count = context.watch<ListOfTask>().number;
+    final totalTaskcount = context.watch<ListOfTask>().totalTaskCount;
+    final taskCompeletedCount = context.watch<ListOfTask>().compeletedTaskCount;
     // ignore: avoid_print
-    print("Total task is $count");
+    print("Total task is $totalTaskcount");
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -95,7 +96,7 @@ class existCode extends StatelessWidget {
                               child: Center(
                                 child: Center(
                                   child: Text(
-                                    "$count Total Tasks",
+                                    "$totalTaskcount Total Tasks",
                                     style: const TextStyle(fontSize: 15),
                                   ),
                                 ),
@@ -134,13 +135,13 @@ class existCode extends StatelessWidget {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 50,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   height: 50,
                                   width: 90,
                                   // color: Colors.teal,
                                   child: Center(
                                     child: Text(
-                                      "1 tasks compeleted",
+                                      "${taskCompeletedCount} tasks compeleted",
                                       style: TextStyle(fontSize: 15),
                                     ),
                                   ),
@@ -174,14 +175,14 @@ class existCode extends StatelessWidget {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 50,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   height: 50,
                                   width: 90,
                                   // color: Colors.teal,
                                   child: Center(
                                     child: Text(
-                                      "6 tasks remaining",
-                                      style: TextStyle(fontSize: 15),
+                                      "${totalTaskcount - taskCompeletedCount} tasks remaining",
+                                      style: const TextStyle(fontSize: 15),
                                     ),
                                   ),
                                 ),
