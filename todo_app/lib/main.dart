@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'AddTask.dart';
 import 'HomePage.dart';
 import 'ListOfTask.dart';
 import 'addTaskProvider.dart';
@@ -21,21 +20,23 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<addTaskProvider>(
-            create: (context) => addTaskProvider(),
-          ),
-          ChangeNotifierProvider<clickedProvider>(
-            create: (context) => clickedProvider(),
-          ),
-          ChangeNotifierProvider<ListOfTask>(
-            create: (context) => ListOfTask(),
-          ),
-        ],
-        child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              body: homePage(),
-            )));
+      providers: [
+        ChangeNotifierProvider<addTaskProvider>(
+          create: (context) => addTaskProvider(),
+        ),
+        ChangeNotifierProvider<clickedProvider>(
+          create: (context) => clickedProvider(),
+        ),
+        ChangeNotifierProvider<ListOfTask>(
+          create: (context) => ListOfTask(),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: homePage(),
+        ),
+      ),
+    );
   }
 }

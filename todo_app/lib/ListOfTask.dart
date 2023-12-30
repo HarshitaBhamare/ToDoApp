@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +46,7 @@ List<TodoItem> todos = [
   // TodoItem(title: 'Read a book', isDone: false),
 ];
 
+// ignore: camel_case_types
 class listItems extends StatefulWidget {
   const listItems({super.key});
 
@@ -52,6 +54,7 @@ class listItems extends StatefulWidget {
   State<listItems> createState() => _listItemsState();
 }
 
+// ignore: camel_case_types
 class _listItemsState extends State<listItems> {
   @override
   Widget build(BuildContext context) {
@@ -84,6 +87,7 @@ class _listItemsState extends State<listItems> {
                           // Provider.of<ListOfTask>(context, listen: false)
                           //     .check(item.isDone);
                           item.isDone = !item.isDone;
+                          // ignore: avoid_print
                           print("count $c");
                         });
                       },
@@ -128,7 +132,7 @@ class _listItemsState extends State<listItems> {
                     ),
                     title: Text(
                       item.title,
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
                 ),

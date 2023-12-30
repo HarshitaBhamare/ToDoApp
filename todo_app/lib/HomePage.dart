@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/AddTask.dart';
@@ -7,6 +8,7 @@ import 'package:todo_app/clickedProvider.dart';
 import 'addName.dart';
 import 'existcode.dart';
 
+// ignore: camel_case_types
 class homePage extends StatefulWidget {
   const homePage({super.key});
 
@@ -14,6 +16,7 @@ class homePage extends StatefulWidget {
   State<homePage> createState() => _homePageState();
 }
 
+// ignore: camel_case_types
 class _homePageState extends State<homePage> {
   String name = "";
   @override
@@ -31,6 +34,7 @@ class _homePageState extends State<homePage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     final isOpen = context.watch<addTaskProvider>().isOpen;
     final isClicked = context.watch<clickedProvider>().isClick;
@@ -45,7 +49,7 @@ class _homePageState extends State<homePage> {
           splashColor: Colors.amber,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-          child: Icon(
+          child: const Icon(
             Icons.add,
             size: 35,
             color: Colors.white,
@@ -78,10 +82,10 @@ class _homePageState extends State<homePage> {
                     ),
                   ),
                 ),
-                listItems(),
+                const listItems(),
               ],
             ),
-            isOpen ? addTaskInList() : SizedBox(),
+            isOpen ? const addTaskInList() : const SizedBox(),
           ],
         ));
   }

@@ -1,11 +1,12 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/HomePage.dart';
 import 'package:todo_app/ListOfTask.dart';
 import 'package:todo_app/clickedProvider.dart';
 
 import 'addTaskProvider.dart';
 
+// ignore: camel_case_types
 class addTaskInList extends StatefulWidget {
   const addTaskInList({super.key});
 
@@ -13,6 +14,7 @@ class addTaskInList extends StatefulWidget {
   State<addTaskInList> createState() => _addTaskInListState();
 }
 
+// ignore: camel_case_types
 class _addTaskInListState extends State<addTaskInList> {
   // String taskController = "";
   final TextEditingController taskController = TextEditingController();
@@ -23,6 +25,7 @@ class _addTaskInListState extends State<addTaskInList> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     final isClose = context.watch<addTaskProvider>().isOpen;
     final isClicked = context.watch<clickedProvider>().isClick;
@@ -58,7 +61,7 @@ class _addTaskInListState extends State<addTaskInList> {
                       spreadRadius: 3,
                     ),
                   ]),
-              child: Icon(Icons.task),
+              child: const Icon(Icons.task),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * .009,
@@ -74,22 +77,20 @@ class _addTaskInListState extends State<addTaskInList> {
               height: MediaQuery.of(context).size.height * .01,
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: MediaQuery.of(context).size.width / 1.41,
               height: MediaQuery.of(context).size.height / 5,
               decoration: BoxDecoration(
                   color: Colors.black12,
                   borderRadius: BorderRadius.circular(30)),
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintStyle: TextStyle(fontSize: 25),
                     border: InputBorder.none,
                     hintText: "Enter new Task "),
                 controller: taskController,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 30,
-
-                  // backgroundColor: Colors.black,
                 ),
               ),
             ),
@@ -110,18 +111,18 @@ class _addTaskInListState extends State<addTaskInList> {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2.3,
                     height: MediaQuery.of(context).size.height / 22,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       // color: Colors.blue,
                       borderRadius:
                           BorderRadius.only(bottomLeft: Radius.circular(20)),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Cancel",
                       style: TextStyle(color: Colors.red, fontSize: 20),
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   "|",
                   style: TextStyle(fontSize: 25),
                 ),
@@ -143,12 +144,11 @@ class _addTaskInListState extends State<addTaskInList> {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2.69,
                     height: MediaQuery.of(context).size.height / 22,
-                    decoration: BoxDecoration(
-                      // color: Colors.red,
+                    decoration: const BoxDecoration(
                       borderRadius:
                           BorderRadius.only(bottomRight: Radius.circular(20)),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Create",
                       style: TextStyle(color: Colors.blue, fontSize: 20),
                     ),

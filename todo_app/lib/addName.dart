@@ -28,7 +28,7 @@ void askName(BuildContext context, Function(String) onNameSubmitted) {
               decoration: BoxDecoration(
                   color: Colors.blue.shade500,
                   borderRadius: BorderRadius.circular(20)),
-              child: Center(
+              child: const Center(
                   child: Text(
                 'Create',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
