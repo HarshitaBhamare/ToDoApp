@@ -1,40 +1,143 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class listOfTasks extends StatefulWidget {
-  const listOfTasks({super.key});
+class ListOfTask with ChangeNotifier {
+  int number = todos.length;
+  int set = 0;
+  int count = 1;
+  // bool onclick = false;
+  void itemadd() {
+    number++;
+    notifyListeners();
+  }
 
-  @override
-  State<listOfTasks> createState() => _listOfTasksState();
+  void itemdel() {
+    number--;
+    notifyListeners();
+  }
+
+  void check(bool a) {
+    if (a == true) {
+      count++;
+      notifyListeners();
+    } else {
+      count--;
+      notifyListeners();
+    }
+  }
 }
 
-class _listOfTasksState extends State<listOfTasks> {
+class TodoItem {
+  String title;
+  bool isDone;
+
+  TodoItem({required this.title, this.isDone = false});
+}
+
+List<TodoItem> todos = [
+  TodoItem(title: 'Buy groceries', isDone: false),
+  TodoItem(title: 'Call the plumber', isDone: false),
+  TodoItem(title: 'Finish Flutter project', isDone: false),
+  TodoItem(title: 'Workout for 30 minutes', isDone: true),
+  TodoItem(title: 'Read a book', isDone: false)
+];
+
+class listItems extends StatefulWidget {
+  const listItems({super.key});
+
+  @override
+  State<listItems> createState() => _listItemsState();
+}
+
+class _listItemsState extends State<listItems> {
   @override
   Widget build(BuildContext context) {
+    int c = context.watch<ListOfTask>().count;
     return Scaffold(
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          // return ListTile(
-          //   leading: Icon(Icons.check_box_outline_blank_rounded),
-          //   trailing: Icon(Icons.delete),
-          //   title: Text("sf"),
-          return Container(
-            color: Colors.red,
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+      body: SizedBox(
+        child: ListView.builder(
+          padding: EdgeInsets.only(top: 12),
+          itemCount: todos.length,
+          itemBuilder: (context, index) {
+            TodoItem item = todos[index];
+
+            return SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                 child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: const ListTile(
-                      leading: Icon(Icons.check_box_outline_blank_rounded),
-                      trailing: Icon(Icons.delete),
-                      title: Text("sf"),
-                    ))),
-          );
-        },
+                  height: 80,
+                  decoration: BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Colors.black38,
+                            offset: Offset(0, 0),
+                            blurRadius: 8,
+                            spreadRadius: 3)
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Center(
+                    child: ListTile(
+                      leading: InkWell(
+                        onTap: () {
+                          setState(() {
+                            // Provider.of<ListOfTask>(context, listen: false)
+                            //     .check(item.isDone);
+                            item.isDone = !item.isDone;
+                            print("count $c");
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              color: item.isDone
+                                  ? Colors.blue.shade100
+                                  : Colors.blue.shade100,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Icon(
+                            item.isDone
+                                ? Icons.check_box
+                                : Icons.check_box_outline_blank_rounded,
+                            size: 30,
+                            color: item.isDone
+                                ? Colors.blue
+                                : Colors.blue.shade500,
+                          ),
+                        ),
+                      ),
+                      trailing: InkWell(
+                        onTap: () {
+                          setState(() {
+                            todos.removeAt(index);
+                            Provider.of<ListOfTask>(context, listen: false)
+                                .itemdel();
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              color: Colors.red.shade100,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Icon(
+                            Icons.delete,
+                            size: 30,
+                            color: Colors.red.shade500,
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        item.title,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

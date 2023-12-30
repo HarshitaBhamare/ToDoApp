@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/AddTask.dart';
 import 'package:todo_app/ListOfTask.dart';
 import 'package:todo_app/addTaskProvider.dart';
+import 'package:todo_app/clickedProvider.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -14,18 +15,22 @@ class homePage extends StatefulWidget {
 class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
+    // final done = context.watch<ListOfTask>().done;
+    final count = context.watch<ListOfTask>().number;
+    print(count);
     final isOpen = context.watch<addTaskProvider>().isOpen;
+    final isClicked = context.watch<clickedProvider>().isClick;
     return Stack(children: [
       Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
               Provider.of<addTaskProvider>(context, listen: false).OpenMenu();
-              print(isOpen);
             });
           },
           backgroundColor: Colors.pink,
-          // hoverColor: Colors.pink,
+          // hoverColor: Colors.
+          // ,
           // hoverElevation: 100,
           splashColor: Colors.amber,
           shape:
@@ -67,10 +72,11 @@ class _homePageState extends State<homePage> {
                       // height: MediaQuery.of(context).size.height / 20,
                       // ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Provider.of<clickedProvider>(context, listen: false)
+                              .checkClick();
+                        },
                         child: Container(
-                          child: Icon(Icons.search, size: 30),
-                          // alignment: Alignment.topCenter,
                           decoration: BoxDecoration(
                             // boxShadow: box,
                             borderRadius: BorderRadius.circular(100),
@@ -78,6 +84,17 @@ class _homePageState extends State<homePage> {
                           ),
                           height: MediaQuery.of(context).size.height / 16.5,
                           width: MediaQuery.of(context).size.width / 7.5,
+                          child: isClicked
+                              ? Container(
+                                  color: Colors.purple,
+                                  child: SizedBox(
+                                    height: MediaQuery.of(context).size.height /
+                                        16.5,
+                                    width: MediaQuery.of(context).size.width,
+                                    // color: Colors.purple,
+                                  ),
+                                )
+                              : Icon(Icons.search, size: 30),
                         ),
                       ),
                       SizedBox(
@@ -86,7 +103,7 @@ class _homePageState extends State<homePage> {
                     ],
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(25),
                           bottomLeft: Radius.circular(25)),
@@ -148,10 +165,17 @@ class _homePageState extends State<homePage> {
                                             MediaQuery.of(context).size.width /
                                                 100,
                                       ),
-                                      Text(
-                                        "9 task pending",
-                                        style: TextStyle(fontSize: 15),
-                                      )
+                                      Container(
+                                        height: 50,
+                                        width: 120,
+                                        // color: Colors.teal,
+                                        child: Center(
+                                          child: Text(
+                                            "$count task pending",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -196,10 +220,17 @@ class _homePageState extends State<homePage> {
                                                     .width /
                                                 100,
                                           ),
-                                          Text(
-                                            "2 tasks completed",
-                                            style: TextStyle(fontSize: 13),
-                                          )
+                                          Container(
+                                            height: 50,
+                                            width: 120,
+                                            // color: Colors.teal,
+                                            child: Center(
+                                              child: Text(
+                                                "1 tasks compeleted",
+                                                style: TextStyle(fontSize: 13),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -239,10 +270,17 @@ class _homePageState extends State<homePage> {
                                                     .width /
                                                 100,
                                           ),
-                                          Text(
-                                            "0 tasks remainder",
-                                            style: TextStyle(fontSize: 13),
-                                          )
+                                          Container(
+                                            height: 50,
+                                            width: 120,
+                                            // color: Colors.teal,
+                                            child: Center(
+                                              child: Text(
+                                                "4 tasks remaining",
+                                                style: TextStyle(fontSize: 13),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -269,30 +307,24 @@ class _homePageState extends State<homePage> {
                 ],
               ),
             ),
-            // SizedBox(
-            //   width: MediaQuery.of(context).size.width / 1.2,
-            //   // child:?
-            // ),
-            const Text(
-              "All Tasks",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                // fontSize: MediaQuery.of(context).size.height / 1,
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 1.13,
+              child: Container(
+                child: Text(
+                  "All Tasks",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: MediaQuery.of(context).size.height / 30,
+                  ),
+                ),
               ),
             ),
-            // SizedBox(
-            //   width: MediaQuery.of(context).size.width,
-            //   // child:
-            //   height: MediaQuery.of(context).size.height / 2.5,
-            //   // color: Colors.amber,
-            // ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 2.5,
-              decoration: BoxDecoration(color: Colors.red),
-              child: listOfTasks(),
-            ),
+              child: listItems(),
+            )
           ],
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/HomePage.dart';
+import 'package:todo_app/ListOfTask.dart';
+import 'package:todo_app/clickedProvider.dart';
 
 import 'addTaskProvider.dart';
 
@@ -12,9 +14,18 @@ class addTaskInList extends StatefulWidget {
 }
 
 class _addTaskInListState extends State<addTaskInList> {
+  // String taskController = "";
+  final TextEditingController taskController = TextEditingController();
+
   @override
+  void dispose() {
+    taskController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     final isClose = context.watch<addTaskProvider>().isOpen;
+    final isClicked = context.watch<clickedProvider>().isClick;
     return Container(
       color: Colors.black54,
       alignment: Alignment.center,
@@ -67,6 +78,7 @@ class _addTaskInListState extends State<addTaskInList> {
                 color: Colors.black26,
               ),
               child: TextField(
+                controller: taskController,
                 style: TextStyle(
                   fontSize: 20,
                   // backgroundColor: Colors.black,
@@ -83,7 +95,7 @@ class _addTaskInListState extends State<addTaskInList> {
                     setState(() {
                       Provider.of<addTaskProvider>(context, listen: false)
                           .CloseMenu();
-                      print(isClose);
+                      // print(isClose);
                     });
                   },
                   child: Container(
@@ -106,6 +118,19 @@ class _addTaskInListState extends State<addTaskInList> {
                   style: TextStyle(fontSize: 34.5),
                 ),
                 InkWell(
+                  onTap: () {
+                    if (taskController.text.trim().isNotEmpty) {
+                      setState(() {
+                        todos.add(TodoItem(title: taskController.text.trim()));
+                        taskController.clear();
+                      });
+                      // Provider.of<clickedProvider>(context, listen: false)
+                      //     .checkClick();
+                      Provider.of<addTaskProvider>(context, listen: false)
+                          .CloseMenu();
+                      Provider.of<ListOfTask>(context, listen: false).itemadd();
+                    }
+                  },
                   child: Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2.69,

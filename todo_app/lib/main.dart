@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/HomePage.dart';
-import 'package:todo_app/ListOfTask.dart';
-import 'AddTask.dart';
+import 'HomePage.dart';
+import 'ListOfTask.dart';
 import 'addTaskProvider.dart';
+import 'clickedProvider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,11 +23,17 @@ class _MyAppState extends State<MyApp> {
         providers: [
           ChangeNotifierProvider<addTaskProvider>(
             create: (context) => addTaskProvider(),
-          )
+          ),
+          ChangeNotifierProvider<clickedProvider>(
+            create: (context) => clickedProvider(),
+          ),
+          ChangeNotifierProvider<ListOfTask>(
+            create: (context) => ListOfTask(),
+          ),
         ],
         child: MaterialApp(
             home: Scaffold(
-          // body: listOfTasks(),
+          // body: listItems(),
           body: homePage(),
           // body: addTaskInList(),
         )));
