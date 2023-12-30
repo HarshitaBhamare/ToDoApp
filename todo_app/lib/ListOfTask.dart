@@ -39,7 +39,10 @@ List<TodoItem> todos = [
   TodoItem(title: 'Call the plumber', isDone: false),
   TodoItem(title: 'Finish Flutter project', isDone: false),
   TodoItem(title: 'Workout for 30 minutes', isDone: true),
-  TodoItem(title: 'Read a book', isDone: false)
+  TodoItem(title: 'Read a book', isDone: false),
+  TodoItem(title: 'Take power-nap', isDone: false),
+  TodoItem(title: 'complete workout', isDone: false),
+  // TodoItem(title: 'Read a book', isDone: false),
 ];
 
 class listItems extends StatefulWidget {
@@ -53,92 +56,88 @@ class _listItemsState extends State<listItems> {
   @override
   Widget build(BuildContext context) {
     int c = context.watch<ListOfTask>().count;
-    return Scaffold(
-      body: SizedBox(
-        child: ListView.builder(
-          padding: EdgeInsets.only(top: 12),
-          itemCount: todos.length,
-          itemBuilder: (context, index) {
+    return Consumer<ListOfTask>(builder: (context, listOfTask, child) {
+      return SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
             TodoItem item = todos[index];
 
-            return SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: Container(
-                  height: 80,
-                  decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black38,
-                            offset: Offset(0, 0),
-                            blurRadius: 8,
-                            spreadRadius: 3)
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25)),
-                  child: Center(
-                    child: ListTile(
-                      leading: InkWell(
-                        onTap: () {
-                          setState(() {
-                            // Provider.of<ListOfTask>(context, listen: false)
-                            //     .check(item.isDone);
-                            item.isDone = !item.isDone;
-                            print("count $c");
-                          });
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              color: item.isDone
-                                  ? Colors.blue.shade100
-                                  : Colors.blue.shade100,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Icon(
-                            item.isDone
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank_rounded,
-                            size: 30,
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Container(
+                height: 80,
+                decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black38,
+                          offset: Offset(0, 0),
+                          blurRadius: 8,
+                          spreadRadius: 3)
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25)),
+                child: Center(
+                  child: ListTile(
+                    leading: InkWell(
+                      onTap: () {
+                        setState(() {
+                          // Provider.of<ListOfTask>(context, listen: false)
+                          //     .check(item.isDone);
+                          item.isDone = !item.isDone;
+                          print("count $c");
+                        });
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
                             color: item.isDone
-                                ? Colors.blue
-                                : Colors.blue.shade500,
-                          ),
+                                ? Colors.blue.shade100
+                                : Colors.blue.shade100,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Icon(
+                          item.isDone
+                              ? Icons.check_box
+                              : Icons.check_box_outline_blank_rounded,
+                          size: 30,
+                          color:
+                              item.isDone ? Colors.blue : Colors.blue.shade500,
                         ),
                       ),
-                      trailing: InkWell(
-                        onTap: () {
-                          setState(() {
-                            todos.removeAt(index);
-                            Provider.of<ListOfTask>(context, listen: false)
-                                .itemdel();
-                          });
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              color: Colors.red.shade100,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Icon(
-                            Icons.delete,
-                            size: 30,
-                            color: Colors.red.shade500,
-                          ),
+                    ),
+                    trailing: InkWell(
+                      onTap: () {
+                        setState(() {
+                          todos.removeAt(index);
+                          Provider.of<ListOfTask>(context, listen: false)
+                              .itemdel();
+                        });
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: Colors.red.shade100,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Icon(
+                          Icons.delete,
+                          size: 30,
+                          color: Colors.red.shade500,
                         ),
                       ),
-                      title: Text(
-                        item.title,
-                        style: TextStyle(fontSize: 18),
-                      ),
+                    ),
+                    title: Text(
+                      item.title,
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                 ),
               ),
             );
           },
+          childCount: todos.length,
         ),
-      ),
-    );
+      );
+    });
   }
 }

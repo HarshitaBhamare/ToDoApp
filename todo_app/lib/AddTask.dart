@@ -39,7 +39,7 @@ class _addTaskInListState extends State<addTaskInList> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height / 40,
+              height: MediaQuery.of(context).size.height / 50,
             ),
             Container(
               width: MediaQuery.of(context).size.width / 6,
@@ -61,7 +61,7 @@ class _addTaskInListState extends State<addTaskInList> {
               child: Icon(Icons.task),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * .005,
+              height: MediaQuery.of(context).size.height * .009,
             ),
             Text(
               "New Task",
@@ -70,23 +70,31 @@ class _addTaskInListState extends State<addTaskInList> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .01,
+            ),
             Container(
-              width: MediaQuery.of(context).size.width / 1.4,
-              height: MediaQuery.of(context).size.height / 4.6,
+              padding: EdgeInsets.all(20),
+              width: MediaQuery.of(context).size.width / 1.41,
+              height: MediaQuery.of(context).size.height / 5,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.black26,
-              ),
+                  color: Colors.black12,
+                  borderRadius: BorderRadius.circular(30)),
               child: TextField(
+                decoration: InputDecoration(
+                    hintStyle: TextStyle(fontSize: 25),
+                    border: InputBorder.none,
+                    hintText: "Enter new Task "),
                 controller: taskController,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 30,
+
                   // backgroundColor: Colors.black,
                 ),
               ),
             ),
             SizedBox(
-              height: 7,
+              height: MediaQuery.of(context).size.height / 70,
             ),
             Row(
               children: [
@@ -101,7 +109,7 @@ class _addTaskInListState extends State<addTaskInList> {
                   child: Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2.3,
-                    height: 48,
+                    height: MediaQuery.of(context).size.height / 22,
                     decoration: BoxDecoration(
                       // color: Colors.blue,
                       borderRadius:
@@ -109,13 +117,13 @@ class _addTaskInListState extends State<addTaskInList> {
                     ),
                     child: Text(
                       "Cancel",
-                      style: TextStyle(color: Colors.red, fontSize: 22),
+                      style: TextStyle(color: Colors.red, fontSize: 20),
                     ),
                   ),
                 ),
                 Text(
                   "|",
-                  style: TextStyle(fontSize: 34.5),
+                  style: TextStyle(fontSize: 25),
                 ),
                 InkWell(
                   onTap: () {
@@ -134,7 +142,7 @@ class _addTaskInListState extends State<addTaskInList> {
                   child: Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 2.69,
-                    height: 48,
+                    height: MediaQuery.of(context).size.height / 22,
                     decoration: BoxDecoration(
                       // color: Colors.red,
                       borderRadius:
@@ -142,7 +150,7 @@ class _addTaskInListState extends State<addTaskInList> {
                     ),
                     child: Text(
                       "Create",
-                      style: TextStyle(color: Colors.blue, fontSize: 22),
+                      style: TextStyle(color: Colors.blue, fontSize: 20),
                     ),
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'AddTask.dart';
 import 'HomePage.dart';
 import 'ListOfTask.dart';
 import 'addTaskProvider.dart';
@@ -32,10 +33,9 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
-          // body: listItems(),
-          body: homePage(),
-          // body: addTaskInList(),
-        )));
+              body: homePage(),
+            )));
   }
 }
