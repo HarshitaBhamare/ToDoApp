@@ -28,6 +28,13 @@ class ListOfTask with ChangeNotifier {
 
     notifyListeners();
   }
+
+  void setDelete(bool isDone) {
+    if (isDone) {
+      compeletedTaskCount--;
+    }
+    notifyListeners();
+  }
 }
 
 class TodoItem {
@@ -112,6 +119,8 @@ class _listItemsState extends State<listItems> {
                     trailing: InkWell(
                       onTap: () {
                         setState(() {
+                          Provider.of<ListOfTask>(context, listen: false)
+                              .setDelete(todos[index].isDone);
                           todos.removeAt(index);
                           Provider.of<ListOfTask>(context, listen: false)
                               .itemdel();
